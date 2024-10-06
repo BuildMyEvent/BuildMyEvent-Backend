@@ -2,11 +2,12 @@ import express from 'express';
 import { createUserRoutes } from './routes/user';
 import { createAuthRoutes } from './routes/auth';
 import { config } from './config/auth';
+import cookieParser from 'cookie-parser';
 
 
 const app = express();
 app.use(express.json());
-
+app.use(cookieParser());
 
 //Load Routes
 app.use('/users', createUserRoutes());
