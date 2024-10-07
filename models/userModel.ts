@@ -33,7 +33,9 @@ class UserModel{
         return user;
     }
 
-    static async update(id: number,name: string, lastname: string, email: string, password: string, wallet: string){
+    static async update(currentUser: number, user_id: number,body: any){
+        const { name, lastname, email, password, wallet } = body;
+
         let hashedPassword;
         if(password){
             hashedPassword = await bcrypt.hash(password, 10);
@@ -41,7 +43,7 @@ class UserModel{
 
         try {
             const user = await prisma.user.update({
-                where: { id: Number(id) },
+                where: { id: Number(user_id) },
                 data: {
                     name,
                     lastname,

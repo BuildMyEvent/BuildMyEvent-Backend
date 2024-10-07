@@ -3,6 +3,8 @@ import { createUserRoutes } from './routes/user';
 import { createAuthRoutes } from './routes/auth';
 import { config } from './config/auth';
 import cookieParser from 'cookie-parser';
+import { createEventRoutes } from './routes/event';
+import { createConfigRoutes } from './routes/config';
 
 
 const app = express();
@@ -12,6 +14,8 @@ app.use(cookieParser());
 //Load Routes
 app.use('/users', createUserRoutes());
 app.use('/auth', createAuthRoutes());
+app.use('/events', createEventRoutes());
+app.use('/config', createConfigRoutes());
 
 app.get('/', (req, res) => {
     res.send('Hello World');
