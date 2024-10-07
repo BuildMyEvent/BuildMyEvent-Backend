@@ -25,14 +25,14 @@ export class UserController {
     }
 
     static async updateUser(req: Request, res: Response){
-        const currentUser = getCurrentUser(req);
-        const user_id = parseInt(req.params.id);
+        // const currentUser = getCurrentUser(req);
+        // const user_id = parseInt(req.params.id);
 
-        try {
-            const user = await UserModel.update(currentUser?.id, user_id, req.body);
-            res.status(200).json({ message: "User updated", user });
-        } catch (error) {
-            res.status(400).json({ message: "User not updated", error });
-        }
+        // try {
+        //     const user = await UserModel.update(currentUser?.id, user_id, req.body);
+        //     res.status(200).json({ message: "User updated", user });
+        // } catch (error) {
+        //     res.status(400).json({ message: "User not updated", error });
+        // }
     }
 }

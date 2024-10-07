@@ -91,7 +91,8 @@ class WLCEventModel{
 
     static async getConfigSettingsByDomain(domain: string){
         const config = await prisma.whitelabelConfiguration.findMany({
-            where: { domain }
+            where: { domain },
+            include: { event: true }
         });
 
         let output: { [key: string]: string } = {};
@@ -102,8 +103,10 @@ class WLCEventModel{
 
         // Set Event ID
         output.eventId = String(config[0].eventId);
+        
+        const event = config[0].event;
 
-        return output;
+        return {config: output, event };
     }
 }
 

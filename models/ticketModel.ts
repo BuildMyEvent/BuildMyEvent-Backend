@@ -4,8 +4,10 @@ const prisma = new PrismaClient();
 
 class TicketModel{
 
-    static async createTicket(body: any){
-        const { name, price, eventId } = body;
+    static async createWithEvent(body: any){
+        const { eventId, ownerId, type, price } = body;
+
+        const {} = body;
 
         const ticket = await prisma.ticket.create({
             data: {
@@ -20,6 +22,30 @@ class TicketModel{
         return ticket;
     }
 
+    static async updateTicket(ticketId: number, body: any){
+        const { type, price, isUsed } = body;
+
+        const ticket = await prisma.ticket.update({
+            where: { id: ticketId },
+            data: {
+                type,
+                price,
+                isUsed
+            }
+        });
+
+        return ticket;
+    }
+
+    static async getTicketById(ticketId: number){
+        const ticket = await prisma.ticket.findUnique({ where: { id: ticketId } });
+
+        if(!ticket) throw new Error('Ticket not found');
+
+        return ticket;
+    }
+
+    
 }
 
 export default TicketModel;
