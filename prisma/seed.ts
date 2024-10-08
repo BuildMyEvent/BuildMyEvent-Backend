@@ -54,8 +54,8 @@ async function main() {
 
     const userRole1 = await prisma.userRole.create({
         data:{
-            userId: user1.id,
-            roleId: role1.id
+            userId: villa.id,
+            roleId: robert.id
         }
     })
 }
