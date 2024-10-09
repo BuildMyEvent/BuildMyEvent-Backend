@@ -1,11 +1,6 @@
 {
     "version": 2,
-    "rewrites": [
-        {
-          "source": "/:path*",
-          "destination": "/dist/app.js"
-        }
-    ],
+    "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
     "builds": [
         {
           "src": "app.ts", 

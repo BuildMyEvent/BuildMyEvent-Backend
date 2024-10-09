@@ -1,10 +1,10 @@
 import express from 'express';
-import { createUserRoutes } from './routes/user';
-import { createAuthRoutes } from './routes/auth';
-import { config } from './config/auth';
+import { createUserRoutes } from '../routes/user';
+import { createAuthRoutes } from '../routes/auth';
+import { config } from '../config/auth';
 import cookieParser from 'cookie-parser';
-import { createEventRoutes } from './routes/event';
-import { createConfigRoutes } from './routes/config';
+import { createEventRoutes } from '../routes/event';
+import { createConfigRoutes } from '../routes/config';
 
 
 const app = express();
