@@ -1,5 +1,11 @@
 {
     "version": 2,
+    "rewrites": [
+        {
+          "source": "/:path*",
+          "destination": "/app.ts"
+        }
+    ],
     "builds": [
         {
           "src": "app.ts", 
