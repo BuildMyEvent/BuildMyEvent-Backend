@@ -8,7 +8,7 @@
     "dev": "nodemon --exec ts-node api/index.ts",
     "build": "tsc && prisma generate",
     "start": "node dist/api/index.js",
-    "vercel-build": "echo hello"
+    "vercel-build": "npm run build"
   },
   "keywords": [],
   "author": "",
