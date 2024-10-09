@@ -18,7 +18,8 @@ app.use('/events', createEventRoutes());
 app.use('/config', createConfigRoutes());
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    //Response Json
+    res.json({ message: 'Hello we are BuildMyEvent' });
 });
 
 app.listen(config.port, () => {
