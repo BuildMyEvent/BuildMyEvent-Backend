@@ -1,16 +1,4 @@
 {
     "version": 2,
-    "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
-    "builds": [
-        {
-          "src": "app.ts", 
-          "use": "@vercel/node", 
-          "config": {
-            "includeFiles": [
-              "prisma/schema.prisma", 
-              "prisma/seed.ts" 
-            ]
-          }
-        }
-      ]
+    "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
