@@ -3,7 +3,7 @@
     "rewrites": [
         {
           "source": "/:path*",
-          "destination": "/app.ts"
+          "destination": "/dist/app.js"
         }
     ],
     "builds": [
