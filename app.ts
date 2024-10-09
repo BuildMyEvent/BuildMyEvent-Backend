@@ -1,10 +1,10 @@
 import express from 'express';
-import { createUserRoutes } from '../routes/user';
-import { createAuthRoutes } from '../routes/auth';
-import { config } from '../config/auth';
+import { createUserRoutes } from './routes/user';
+import { createAuthRoutes } from './routes/auth';
+import { config } from './config/auth';
 import cookieParser from 'cookie-parser';
-import { createEventRoutes } from '../routes/event';
-import { createConfigRoutes } from '../routes/config';
+import { createEventRoutes } from './routes/event';
+import { createConfigRoutes } from './routes/config';
 
 
 const app = express();
@@ -25,3 +25,5 @@ app.get('/', (req, res) => {
 app.listen(config.port, () => {
     console.log('Server is running on port 3000');
 });
+
+export default app;
