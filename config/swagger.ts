@@ -1,33 +1,19 @@
-import dotenv from 'dotenv';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUI from 'swagger-ui-express';
+import { swaggerWrapper } from "../swagger/swagger_wrapper";
 
-dotenv.config(); 
+export const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
-export const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+// Genera las especificaciones de Swagger a partir de `swaggerWrapper`
+const swaggerSpecs = swaggerJsdoc(swaggerWrapper);
 
-
-// Configuración básica de Swagger
-export const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API Documentation | BuildMyEvent',
-      version: '1.0.0',
-      description: 'API de ejemplo documentada con Swagger',
-    },
-    servers: [
-      {
-        url: "https://api.buildmyevent.xyz",
-      },
-      {
-        url: "http://localhost:3000",
-      }
-    ],
-  },
-  apis: [
-    './controllers/*.ts',
-    './routes/*.ts',
-  ],
+// Configura opciones adicionales para Swagger UI
+const options = {
+  customCssUrl: CSS_URL,
 };
 
-
+// Exporta los parámetros para la configuración de Swagger en Express
+export const swaggerParams = {
+  swaggerUI: swaggerUI.serve,
+  swaggerSetup: swaggerUI.setup(swaggerSpecs, options)
+};

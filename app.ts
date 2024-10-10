@@ -5,9 +5,7 @@ import { config } from './config/auth';
 import cookieParser from 'cookie-parser';
 import { createEventRoutes } from './routes/event';
 import { createConfigRoutes } from './routes/config';
-import { CSS_URL } from './config/swagger';
-import swaggerUi from 'swagger-ui-express';
-import { swaggerWrapper } from './swagger/swagger_wrapper';
+import { swaggerParams } from './config/swagger';
 
 
 
@@ -16,11 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Configurar Swagger
-app.use(
-    "/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerWrapper, { customCssUrl: CSS_URL })
-);
+app.use('/api-docs', swaggerParams.swaggerUI, swaggerParams.swaggerSetup);
   
 
 //Load Routes

@@ -10,6 +10,7 @@ class AuthModel{
 
         const checkUser = await prisma.user.findUnique({ where: { email: email } });
         
+        
         if(checkUser) throw new Error('User already exists');
 
         const hashedPassword = await bcrypt.hash(password, 10);
