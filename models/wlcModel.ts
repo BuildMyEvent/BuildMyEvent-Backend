@@ -66,7 +66,6 @@ class WLCEventModel{
         const domain = config.domain;
         const eventId = parseInt(config.eventId);
 
-
         // Insert each key-value pair in the config object
         let output = {};
         for (const [key, value] of Object.entries(config)) {
@@ -75,14 +74,17 @@ class WLCEventModel{
                 where: { domain, config_key: key, eventId }
             });
 
-            if(checkConfig){
-                output = await prisma.whitelabelConfiguration.update({
-                    where: { id: checkConfig.id },
-                    data: {
-                        config_value: String(value)
-                    }
-                });
-            }
+            console.log(domain,key, String(value), eventId, checkConfig);
+            
+
+            // if(!checkConfig){
+            //     output = await prisma.whitelabelConfiguration.update({
+            //         where: { id: checkConfig.id },
+            //         data: {
+            //             config_value: String(value)
+            //         }
+            //     });
+            // }
         }
     
         return output ? output : config;

@@ -47,6 +47,27 @@ class EventModel{
         let startDateObj = new Date(startDate);
         let endDateObj = new Date(endDate);
 
+        //Check if event exists
+        const checkEvent = await prisma.event.findFirst({
+            where: { domain: domain, id: { not: eventId } }
+        });
+        
+        if(checkEvent !== null){
+            throw new Error('Event with domain exist, choose another domain')
+        };
+
+        //Update domain in WLC if changed, check if domain it diferent
+        const current_event = await prisma.event.findUnique({
+            where: { id: eventId }
+        });
+
+        if(current_event){
+            await prisma.whitelabelConfiguration.updateMany({
+                where: { domain: current_event.domain },
+                data: { domain: domain }
+            })
+        }
+
         const event = await prisma.event.update({
             where: { id: eventId },
             data: {

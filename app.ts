@@ -5,9 +5,9 @@ import { config } from './config/auth';
 import cookieParser from 'cookie-parser';
 import { createEventRoutes } from './routes/event';
 import { createConfigRoutes } from './routes/config';
-import { swaggerOptions, CSS_URL } from './config/swagger';
-import swaggerJsdoc from 'swagger-jsdoc';
+import { CSS_URL } from './config/swagger';
 import swaggerUi from 'swagger-ui-express';
+import { swaggerWrapper } from './swagger/swagger_wrapper';
 
 
 
@@ -16,12 +16,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Configurar Swagger
-const specs = swaggerJsdoc(swaggerOptions);
-
 app.use(
     "/api-docs",
     swaggerUi.serve,
-    swaggerUi.setup(specs, { customCssUrl: CSS_URL })
+    swaggerUi.setup(swaggerWrapper, { customCssUrl: CSS_URL })
 );
   
 

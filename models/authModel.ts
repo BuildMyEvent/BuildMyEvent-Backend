@@ -20,7 +20,7 @@ class AuthModel{
                 password: hashedPassword,
                 name,
                 lastname,
-                wallet
+                wallet: wallet || null
             }
         });
 
