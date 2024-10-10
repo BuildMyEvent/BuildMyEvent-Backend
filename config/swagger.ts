@@ -27,8 +27,4 @@ export const swaggerOptions = {
   ],
 };
 
-export const options = {
-    customCssUrl: CSS_URL
-};
-
 
