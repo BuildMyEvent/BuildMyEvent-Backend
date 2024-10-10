@@ -14,7 +14,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Configurar Swagger
-app.use('/api-docs', swaggerParams.swaggerUI, swaggerParams.swaggerSetup);
+app.use(
+    '/api-docs', 
+    express.static('node_modules/swagger-ui-dist/', {index: false}),
+    swaggerParams.swaggerUI, 
+    swaggerParams.swaggerSetup
+);
   
 
 //Load Routes
