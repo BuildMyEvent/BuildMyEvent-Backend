@@ -1,12 +1,13 @@
-import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
-import { Express } from 'express';
 import dotenv from 'dotenv';
 
 dotenv.config(); 
 
+export const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+
+
 // Configuración básica de Swagger
-const swaggerOptions = {
+export const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
@@ -26,8 +27,8 @@ const swaggerOptions = {
   ],
 };
 
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
-
-export const setupSwagger = (app: Express) => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+export const options = {
+    customCssUrl: CSS_URL
 };
+
+
