@@ -17,8 +17,11 @@ export const swaggerOptions = {
     },
     servers: [
       {
-        url: process.env.BASE_URL || 'http://localhost:'+process.env.PORT,
+        url: "https://api.buildmyevent.xyz",
       },
+      {
+        url: "http://localhost:3000",
+      }
     ],
   },
   apis: [

@@ -1,6 +1,8 @@
 {
     "version": 2,
     "rewrites": [
-        { "source": "/(.*)", "destination": "/api" }
+        { "source": "/(.*)", "destination": "/api" },
+        { "source": "/api-docs/swagger-ui-bundle.js", "destination": "/api-docs/swagger-ui-bundle.js" },
+        { "source": "/api-docs/swagger-ui-standalone-preset.js", "destination": "/api-docs/swagger-ui-standalone-preset.js" }
     ]
 }
