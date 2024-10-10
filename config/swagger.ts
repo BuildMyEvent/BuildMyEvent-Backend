@@ -22,7 +22,6 @@ const swaggerOptions = {
   },
   apis: [
     './controllers/*.ts',
-    './models/*.ts',
     './routes/*.ts',
   ],
 };
