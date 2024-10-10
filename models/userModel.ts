@@ -33,7 +33,7 @@ class UserModel{
         return user;
     }
 
-    static async update(currentUser: number, user_id: number,body: any){
+    static async update(user_id: number,body: any){
         const { name, lastname, email, password, wallet } = body;
 
         let hashedPassword;

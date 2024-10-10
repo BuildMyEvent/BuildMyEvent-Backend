@@ -5,11 +5,16 @@ import { config } from './config/auth';
 import cookieParser from 'cookie-parser';
 import { createEventRoutes } from './routes/event';
 import { createConfigRoutes } from './routes/config';
+import { setupSwagger } from './config/swagger';
+
 
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+
+// Configurar Swagger
+setupSwagger(app);
 
 //Load Routes
 app.use('/users', createUserRoutes());
