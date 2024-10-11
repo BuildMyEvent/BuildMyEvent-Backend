@@ -4,7 +4,7 @@ const ACCEPTED_ORIGINS: string[] = [
   'http://localhost:8080',
   'http://localhost:3000',
   'http://localhost:4000',
-  "https://buildmyevent.xyz",
+  "https://api.buildmyevent.xyz",
 ];
 
 interface CorsMiddlewareOptions {

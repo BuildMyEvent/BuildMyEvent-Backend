@@ -22,12 +22,10 @@ export class AuthController {
 
     static async register(req: Request, res: Response){
         const { name, lastname, email, password, wallet } = req.body;
-
         try {
             const user = await AuthModel.register(name, lastname, email, password, wallet);
             res.status(201).json({ message: "Register Success", user });
         } catch (error) {
-            console.log(error);
             res.status(400).json({ message: "User not created", error });
         }
     }
