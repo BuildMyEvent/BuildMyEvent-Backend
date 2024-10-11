@@ -95,6 +95,7 @@ model Ticket {
   isUsed      Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  metadataURI String?  // URL de la metadata del ticket
 
   // Relantionship
   event       Event    @relation("EventTickets", fields: [eventId], references: [id])

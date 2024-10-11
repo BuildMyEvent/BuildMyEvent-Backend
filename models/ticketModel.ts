@@ -42,7 +42,7 @@ class TicketModel{
     }
 
     static async updateTicket(ticketId: number, body: any){
-        const {ownerId, type, price, builderScore, image, isUsed, description, title} = body;
+        const {ownerId, type, price, builderScore, image, isUsed, description, title, metadataURI} = body;
 
         const ticket = await prisma.ticket.update({
             where: { id: ticketId },
@@ -54,7 +54,8 @@ class TicketModel{
                 isUsed,
                 image,
                 ownerId,
-                builderScore
+                builderScore,
+                metadataURI
             }
         });
 
