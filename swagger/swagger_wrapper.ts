@@ -2,6 +2,7 @@ import { swaggerAuth } from './swagger_auth';
 import { swaggerConfig } from './swagger_config';
 import { swaggerEvent } from './swagger_event';
 import { swaggerUser } from './swagger_user';
+import { swaggerTicket } from './swagger_ticket';
 
 export const swaggerWrapper = {
   definition: {
@@ -25,7 +26,8 @@ export const swaggerWrapper = {
       ...swaggerAuth,
       ...swaggerConfig,
       ...swaggerEvent,
-      ...swaggerUser
+      ...swaggerUser,
+      ...swaggerTicket
     },
     components: {
       securitySchemes: {
@@ -67,7 +69,23 @@ export const swaggerWrapper = {
             location: { type: "string", example: "Conference Hall A" },
             domain: { type: "string", example: "example.com" }
           }
+        },
+
+        Ticket: {
+          type: "object",
+          properties: {
+            id: { type: "integer", example: 1 },
+            eventId: { type: "integer", example: 1 },
+            type: { type: "string", example: "VIP" },
+            price: { type: "number", example: 50.0 },
+            builderScore: { type: "integer", example: 5 },
+            image: { type: "string", example: "https://example.com/image.jpg" },
+            title: { type: "string", example: "VIP Ticket" },
+            description: { type: "string", example: "Access to VIP area" },
+            isUsed: { type: "boolean", example: false }
+          }
         }
+        
       }
     },
     security: [

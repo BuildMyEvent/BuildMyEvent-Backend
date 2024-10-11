@@ -74,6 +74,12 @@ class TicketModel{
 
         return tickets;
     }
+
+    static async getAllTickets(){
+        const tickets = await prisma.ticket.findMany();
+
+        return tickets;
+    }
     
 }
 
