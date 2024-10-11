@@ -11,8 +11,8 @@ class TicketModel{
 
         const ticket = await prisma.ticket.create({
             data: {
-                title: title || 'Ticket',
-                description,
+                title: title as any,
+                description: description as any,
                 eventId,
                 type,
                 isUsed: false,
