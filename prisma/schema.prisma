@@ -86,7 +86,7 @@ model Ticket {
   id          Int      @id @default(autoincrement())
   eventId     Int      
   ownerId     Int?     
-  title       String
+  title       String?
   description String?
   type        TicketType   // Tipo de ticket (ej. VIP, general)
   price       Float
