@@ -7,8 +7,6 @@ class TicketModel{
     static async create(body: any){   
         const { eventId, type, price, builderScore, image, title, description} = body;
 
-        const {} = body;
-
         const ticket = await prisma.ticket.create({
             data: {
                 title: title as any,

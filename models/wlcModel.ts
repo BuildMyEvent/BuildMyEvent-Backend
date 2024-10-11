@@ -5,9 +5,8 @@ const prisma = new PrismaClient();
 
 class WLCEventModel{
 
-    static async createWithEvent(config: any){
+    static async createWithEvent(config: any, domain: string){
         const eventId = config.eventId;
-        const domain = config.domain;
 
         // Insert each key-value pair in the config object
         for (const [key, value] of Object.entries(config)) {

@@ -36,7 +36,7 @@ class EventModel{
         if(body.config){
             // Add Event ID to config object
             body.config.eventId = event.id;
-            config = await WLCEventModel.createWithEvent(body.config);
+            config = await WLCEventModel.createWithEvent(body.config, domain);
         }
 
         if (body.tickets) {
