@@ -1,5 +1,5 @@
 export const swaggerEvent = {
-    "/events": {
+    "/events/create": {
         "post": {
             "summary": "Create Event",
             "description": "Creates a new event with the provided details",
@@ -104,6 +104,48 @@ export const swaggerEvent = {
                 }
             }
         },
+    },
+    "/events/my": {
+        "get": {
+            "summary": "Get All My Events",
+            "description": "Retrieves all events associated with the current user",
+            "tags": ["Events"],
+            "responses": {
+                "200": {
+                    "description": "Events retrieved successfully",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": { "type": "string", "example": "Events" },
+                                    "events": {
+                                        "type": "array",
+                                        "items": { "$ref": "#/components/schemas/Event" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Events not found",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": { "type": "string", "example": "Events not found" },
+                                    "error": { "type": "string" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/events/{id}/update": {
         "put": {
             "summary": "Update Event",
             "description": "Updates an existing event by ID",
@@ -158,46 +200,6 @@ export const swaggerEvent = {
                                 "type": "object",
                                 "properties": {
                                     "message": { "type": "string", "example": "Event not updated" },
-                                    "error": { "type": "string" }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "/events/my-events": {
-        "get": {
-            "summary": "Get All My Events",
-            "description": "Retrieves all events associated with the current user",
-            "tags": ["Events"],
-            "responses": {
-                "200": {
-                    "description": "Events retrieved successfully",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "message": { "type": "string", "example": "Events" },
-                                    "events": {
-                                        "type": "array",
-                                        "items": { "$ref": "#/components/schemas/Event" }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "400": {
-                    "description": "Events not found",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "message": { "type": "string", "example": "Events not found" },
                                     "error": { "type": "string" }
                                 }
                             }
