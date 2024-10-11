@@ -49,6 +49,8 @@ class TicketModel{
         const ticket = await prisma.ticket.update({
             where: { id: ticketId },
             data: {
+                title,
+                description,
                 type,
                 price,
                 isUsed,
