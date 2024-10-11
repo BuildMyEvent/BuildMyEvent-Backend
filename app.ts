@@ -6,12 +6,14 @@ import cookieParser from 'cookie-parser';
 import { createEventRoutes } from './routes/event';
 import { createConfigRoutes } from './routes/config';
 import { swaggerParams } from './config/swagger';
+import { corsMiddleware } from './middlewares/corsMiddleware';
 import path from 'path';
 
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(corsMiddleware());
 
 // Configurar Swagger
 app.use(

@@ -2,9 +2,9 @@ import cors from 'cors';
 
 const ACCEPTED_ORIGINS: string[] = [
   'http://localhost:8080',
-  'http://localhost:1234',
-  'https://movies.com',
-  'https://midu.dev',
+  'http://localhost:3000',
+  'http://localhost:4000',
+  "https://buildmyevent.xyz",
 ];
 
 interface CorsMiddlewareOptions {
