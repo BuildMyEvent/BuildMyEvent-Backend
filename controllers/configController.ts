@@ -6,8 +6,8 @@ export class configController{
 
     static async getConfigSettings(req: Request, res: Response){
         try {
-            const {config, event} = await WLCEventModel.getConfigSettingsByDomain(req.params.domain);
-            res.status(200).json({ message: "Config settings", config, event });
+            const {config, event, tickets} = await WLCEventModel.getConfigSettingsByDomain(req.params.domain);
+            res.status(200).json({ message: "Config settings", event, tickets, config });
         } catch (error) {
             res.status(400).json({ message: "Config settings not found", error });
         }

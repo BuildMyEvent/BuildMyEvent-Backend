@@ -7,6 +7,7 @@ import { createEventRoutes } from './routes/event';
 import { createConfigRoutes } from './routes/config';
 import { swaggerParams } from './config/swagger';
 import { corsMiddleware } from './middlewares/corsMiddleware';
+import { createTicketRoutes } from './routes/ticket';
 import path from 'path';
 
 
@@ -37,6 +38,7 @@ app.use('/users', createUserRoutes());
 app.use('/auth', createAuthRoutes());
 app.use('/events', createEventRoutes());
 app.use('/config', createConfigRoutes());
+app.use('/tickets', createTicketRoutes());
 
 app.get('/', (req, res) => {
     //Response Json

@@ -74,11 +74,21 @@ model WhitelabelConfiguration {
   eventId         Int  
 }
 
+enum TicketType {
+  GENERAL
+  VIP
+  EARLY_BIRD
+  STUDENT
+  BUILDER
+}
+
 model Ticket {
   id          Int      @id @default(autoincrement())
   eventId     Int      
   ownerId     Int?     
-  type        String   // Tipo de ticket (ej. VIP, general)
+  title       String
+  description String?
+  type        TicketType   // Tipo de ticket (ej. VIP, general)
   price       Float
   image       String
   builderScore Int      @default(0)

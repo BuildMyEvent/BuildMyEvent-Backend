@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import TicketModel from "./ticketModel";
 
 const prisma = new PrismaClient();
 
@@ -94,7 +95,7 @@ class WLCEventModel{
     static async getConfigSettingsByDomain(domain: string){
         const config = await prisma.whitelabelConfiguration.findMany({
             where: { domain },
-            include: { event: true }
+            include: { event: true}
         });
 
         let output: { [key: string]: string } = {};
@@ -108,7 +109,9 @@ class WLCEventModel{
         
         const event = config[0].event;
 
-        return {config: output, event };
+        const tickets = await TicketModel.getTicketsByEvent(event.id);
+
+        return {config: output, event, tickets};
     }
 }
 

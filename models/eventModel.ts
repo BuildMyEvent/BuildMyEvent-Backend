@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import WLCEventModel from "./wlcModel";
+import TicketModel from "./ticketModel";
+import e from "express";
 
 const prisma = new PrismaClient();
 
@@ -8,7 +10,7 @@ class EventModel{
     static async createEvent(currentUser: any, body: any){
         const { title, description, startDate, location, endDate, domain } = body;    
         let config = null;
-
+        let tickets_array: any[] = [];
         let startDateObj = new Date(startDate);
         let endDateObj = new Date(endDate);
 
@@ -37,7 +39,16 @@ class EventModel{
             config = await WLCEventModel.createWithEvent(body.config);
         }
 
-        return {event: event, config: config};
+        if (body.tickets) {
+            tickets_array = await Promise.all(
+                body.tickets.map(async (ticket: any) => {
+                    ticket.eventId = event.id;
+                    return await TicketModel.create(ticket);
+                })
+            );
+        }
+
+        return { event, config, tickets: tickets_array };
     }
 
     static async updateEvent(currentUser: any, eventId: number, body: any){
@@ -86,7 +97,10 @@ class EventModel{
 
     static async getEventById(eventId: number){
         const event = await prisma.event.findUnique({
-            where: { id: eventId }
+            where: { id: eventId },
+            include: {
+                tickets: true,
+            }
         });
         
         if(!event) throw new Error('Event not found');
@@ -97,7 +111,10 @@ class EventModel{
     static async getMyEvents(currentUser: any){
         //Get my EEVNTS
         const events = await prisma.event.findMany({
-            where: { organizerId: currentUser }
+            where: { organizerId: currentUser },
+            include: {
+                tickets: true,
+            }
         });
         
         return events;

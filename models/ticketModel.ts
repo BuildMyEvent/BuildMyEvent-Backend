@@ -4,51 +4,76 @@ const prisma = new PrismaClient();
 
 class TicketModel{
 
-    // static async createWithEvent(body: any){
-    //     const { eventId, ownerId, type, price } = body;
+    static async create(body: any){   
+        const { eventId, type, price, builderScore, image, title, description} = body;
 
-    //     const {} = body;
+        const {} = body;
 
-    //     const ticket = await prisma.ticket.create({
-    //         data: {
-    //             eventId,
-    //             ownerId,
-    //             type,
-    //             isUsed: false,
-    //             price,
-    //             image,
-    //             builderScore
-    //         }
-    //     })
+        const ticket = await prisma.ticket.create({
+            data: {
+                title,
+                description,
+                eventId,
+                type,
+                isUsed: false,
+                price,
+                image,
+                builderScore: builderScore || 0
+            }
+        })
 
-    //     return ticket;
-    // }
+        return ticket;
+    }
 
-    // static async updateTicket(ticketId: number, body: any){
-    //     const { type, price, isUsed } = body;
+    static async createBatch(body: any){     
+        //Check if the Event Exists before creating the tickets
+        const { eventId } = body[0];
 
-    //     const ticket = await prisma.ticket.update({
-    //         where: { id: ticketId },
-    //         data: {
-    //             type,
-    //             price,
-    //             isUsed,
-    //             image,
-    //             builderScore
-    //         }
-    //     });
+        const checkEvent = await prisma.event.findUnique({ where: { id: eventId } });
+        
+        if(!checkEvent) throw new Error('Event not found');
 
-    //     return ticket;
-    // }
+        const tickets_array = await Promise.all(
+            body.map(async (ticket: any) => {
+                // Check if the ticket exists
+                return await TicketModel.create(ticket);
+            })
+        );
 
-    // static async getTicketById(ticketId: number){
-    //     const ticket = await prisma.ticket.findUnique({ where: { id: ticketId } });
+        return tickets_array
+    }
 
-    //     if(!ticket) throw new Error('Ticket not found');
+    static async updateTicket(ticketId: number, body: any){
+        const {ownerId, type, price, builderScore, image, isUsed, description, title} = body;
 
-    //     return ticket;
-    // }
+        const ticket = await prisma.ticket.update({
+            where: { id: ticketId },
+            data: {
+                type,
+                price,
+                isUsed,
+                image,
+                ownerId,
+                builderScore
+            }
+        });
 
+        return ticket;
+    }
+
+    static async getTicketById(ticketId: number){
+        const ticket = await prisma.ticket.findUnique({ where: { id: ticketId } });
+
+        if(!ticket) throw new Error('Ticket not found');
+
+        return ticket;
+    }
+
+    static async getTicketsByEvent(eventId: number){
+        const tickets = await prisma.ticket.findMany({ where: { eventId } });
+
+        return tickets;
+    }
     
 }
 
