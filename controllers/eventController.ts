@@ -6,12 +6,13 @@ import { getCurrentUser } from '../utils/auth';
 export class EventController {
  
   static async createEvent(req: Request, res: Response) {
-    const currentUser = getCurrentUser(req);
-
     try {
-      const event = await EventModel.createEvent(currentUser?.id, req.body);
+      const event = await EventModel.createEvent(req.body);
       res.status(201).json({ message: 'Event created', event });
     } catch (error) {
+
+      console.log('error', error);
+      
       res.status(400).json({ message: 'Event not created', error });
     }
   }

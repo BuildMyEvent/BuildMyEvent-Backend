@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 class TicketModel{
 
     static async create(body: any){   
-        const { eventId, type, price, builderScore, image, title, description} = body;
+        const { eventId, type, price, builderScore, image, title, description, metadataURI} = body;
 
         const ticket = await prisma.ticket.create({
             data: {
@@ -16,7 +16,8 @@ class TicketModel{
                 isUsed: false,
                 price,
                 image,
-                builderScore: builderScore || 0
+                builderScore: builderScore || 0, 
+                metadataURI
             }
         })
 
