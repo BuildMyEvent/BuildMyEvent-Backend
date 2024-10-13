@@ -5,7 +5,7 @@ export const createBaseRoutes = () => {
     const baseRouter = Router();
 
     //Mint NFT
-    baseRouter.post('/mint', BaseController.mintNFT);
+    baseRouter.post('/mint/:ticket', BaseController.mintNFT);
 
     return baseRouter;
 }
