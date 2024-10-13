@@ -7,8 +7,8 @@ const prisma = new PrismaClient();
 
 class EventModel{
 
-    static async createEvent(currentUser: any, body: any){
-        const { title, description, startDate, location, endDate, domain } = body;    
+    static async createEvent(body: any){
+        const { title, description, startDate, location, endDate, domain, organizerId } = body;    
         let config = null;
         let tickets_array: any[] = [];
         let startDateObj = new Date(startDate);
@@ -29,7 +29,7 @@ class EventModel{
                 endDate: endDateObj,
                 location,
                 domain,
-                organizerId: currentUser
+                organizerId
             }
         })
 
