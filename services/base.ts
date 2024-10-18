@@ -1,17 +1,37 @@
 // Aca vamos a tener la logica de los NFTs
-import { publicClient, client, accountAddress } from './client';
+import { publicClient, client, accountAddress, accountClient } from './client';
 import { factoryAbi, ticketAbi } from './abi';
 
 export const mintNFT = async (contractAddress: string, userAddress: string, uri: string) => {
-    const { request } = await publicClient.simulateContract({
+
+    console.log('mint parameters', {
+        address: contractAddress,
+        functionName: 'safeMint',
+        args: [userAddress, uri]
+    });
+
+    // const { request } = await publicClient.simulateContract({
+    //     //@ts-expect-error
+    //     address: contractAddress,
+    //     abi: ticketAbi,
+    //     functionName: 'safeMint',
+    //     account: accountClient,
+    //     args: [userAddress, uri]
+    // });
+
+    // console.log('request', request);
+
+    // const transactionHash = await client.writeContract(request);
+
+    const transactionHash = await client.writeContract({
         //@ts-expect-error
         address: contractAddress,
         abi: ticketAbi,
         functionName: 'safeMint',
         args: [userAddress, uri]
-    });
+    })
 
-    const transactionHash = await client.writeContract(request);
+    console.log('transactionHash', transactionHash);
 
     return transactionHash;
 }

@@ -9,6 +9,7 @@ import { swaggerParams } from './config/swagger';
 import { corsMiddleware } from './middlewares/corsMiddleware';
 import { createTicketRoutes } from './routes/ticket';
 import path from 'path';
+import { createBaseRoutes } from './routes/base';
 
 
 const app = express();
@@ -18,20 +19,20 @@ app.use(corsMiddleware());
 
 // Configurar Swagger
 app.use(
-    '/api-docs', 
-    express.static('node_modules/swagger-ui-dist/', {index: false}),
-    swaggerParams.swaggerUI, 
+    '/api-docs',
+    express.static('node_modules/swagger-ui-dist/', { index: false }),
+    swaggerParams.swaggerUI,
     swaggerParams.swaggerSetup
 );
 
-  // Serve the Swagger UI static assets (CSS, JS, etc.)
-  app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
-  app.use('/api-docs/swagger-ui.css', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui.css')));
-  app.use('/api-docs/swagger-ui-bundle.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-bundle.js')));
-  app.use('/api-docs/swagger-ui-standalone-preset.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js')));
-  app.use('/api-docs/swagger-ui-init.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-init.js')));
-  
-  
+// Serve the Swagger UI static assets (CSS, JS, etc.)
+app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
+app.use('/api-docs/swagger-ui.css', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui.css')));
+app.use('/api-docs/swagger-ui-bundle.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-bundle.js')));
+app.use('/api-docs/swagger-ui-standalone-preset.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js')));
+app.use('/api-docs/swagger-ui-init.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-init.js')));
+
+
 
 //Load Routes
 app.use('/users', createUserRoutes());
@@ -39,6 +40,7 @@ app.use('/auth', createAuthRoutes());
 app.use('/events', createEventRoutes());
 app.use('/config', createConfigRoutes());
 app.use('/tickets', createTicketRoutes());
+app.use('/mint', createBaseRoutes());
 
 app.get('/', (req, res) => {
     //Response Json
