@@ -5,6 +5,7 @@ const ACCEPTED_ORIGINS: string[] = [
   'http://localhost:3000',
   'http://localhost:4000',
   "https://api.buildmyevent.xyz",
+  "https://buildmyevent.xyz",
 ];
 
 interface CorsMiddlewareOptions {
